@@ -11,6 +11,8 @@ ring for the week and unlock costume pieces for Olee and Liny, and a read-only p
 progress at a glance. No accounts, no personal information, no chat, no ads: everything stays on
 the device and works offline.
 
+**Live app:** <https://truj0e.github.io/olee-liny-haunted-study-quest/>
+
 ## Run locally
 
 No build step and no dependencies.

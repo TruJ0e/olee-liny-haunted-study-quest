@@ -44,3 +44,4 @@
 - **Parent view:** Reflected 4/4 tasks, 1 study day this week and in the last 30 days, glow 1/7, 60 lifetime points, and 1/8 costumes unlocked.
 - **Persistence:** After a real page reload, the four completed tasks, 60 points, glow 1, and the `hsaq-state-v1` localStorage record remained.
 - **Dim scenario:** A controlled fixture with three earlier study days and a three-day gap recomputed to glow 1, retained `everLit`, kept the smiling lantern face, and showed “Welcome back! Let's add some glow.”
+- **GitHub Pages:** Enabled from `main` at repository root. GitHub reported the build as `built`, and `https://truj0e.github.io/olee-liny-haunted-study-quest/` returned HTTP 200 with the expected title and checklist markup.
