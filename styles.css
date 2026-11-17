@@ -99,19 +99,34 @@ button:active {
 
 .guide-art {
   width: 96px;
-  height: 96px;
+  height: 120px;
   margin: 0 auto 8px;
+  overflow: visible;
 }
 
-/* Placeholder art until assets/characters/*.svg land */
-.guide-olee .guide-art.placeholder {
-  border-radius: 50% 50% 46% 46%;
-  background: var(--pumpkin-orange);
+.olee-body,
+.olee-knot {
+  fill: var(--pumpkin-orange);
 }
 
-.guide-liny .guide-art.placeholder {
-  border-radius: 50%;
-  background: var(--moonlight-cream);
+.olee-string,
+.smile {
+  fill: none;
+  stroke: var(--midnight-purple-deep);
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+.liny-body {
+  fill: var(--moonlight-cream);
+}
+
+.liny-patch {
+  fill: var(--pumpkin-orange-dim);
+}
+
+.face {
+  fill: var(--midnight-purple-deep);
 }
 
 .sections {
@@ -144,6 +159,100 @@ button:active {
 .placeholder-note {
   margin: 0;
   opacity: 0.8;
+}
+
+.task-list {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.task-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+}
+
+.task-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 16px;
+  background: var(--midnight-purple-deep);
+  color: var(--ghost-white);
+  text-align: left;
+}
+
+.task-toggle::before {
+  display: grid;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  margin-right: 14px;
+  place-items: center;
+  border: 3px solid var(--moonlight-cream);
+  border-radius: 12px;
+  content: "";
+}
+
+.task-toggle[aria-checked="true"] {
+  background: var(--pumpkin-orange);
+  color: var(--midnight-purple-deep);
+}
+
+.task-toggle[aria-checked="true"]::before {
+  border-color: var(--midnight-purple-deep);
+  content: "✓";
+  font-weight: 800;
+}
+
+.remove-task {
+  width: var(--tap);
+  padding: 0;
+  background: var(--midnight-purple-deep);
+  color: var(--moonlight-cream);
+}
+
+.task-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+}
+
+.task-form label {
+  grid-column: 1 / -1;
+  font-weight: 700;
+}
+
+.task-form input {
+  width: 100%;
+  min-width: 0;
+  border: 3px solid var(--moonlight-cream);
+  padding: 8px 14px;
+  background: var(--midnight-purple-deep);
+  color: var(--ghost-white);
+}
+
+.hint,
+.cheer,
+.celebration {
+  margin: 14px 0 0;
+}
+
+.hint {
+  min-height: 30px;
+}
+
+.celebration {
+  border-radius: 16px;
+  padding: 14px;
+  background: var(--pumpkin-orange);
+  color: var(--midnight-purple-deep);
+  font-weight: 800;
+  text-align: center;
 }
 
 .moon-ring {

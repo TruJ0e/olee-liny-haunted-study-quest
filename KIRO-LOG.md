@@ -7,3 +7,10 @@
 - **IDE state:** Kiro showed GitHub sign-in and the Kiro Free usage meter. The project opened, but the runtime log reported `hooks.v2.executionDisabledUntrustedWorkspace` and loaded zero hooks because the workspace trust prompt could not be reached through the elevated always-on-top desktop window that was already present.
 - **CLI state:** `kiro-cli --version` was not available. The 3.4.0 MSI installer exists in the user's Temp directory, but Windows reports no installed Kiro CLI product and no `kiro-cli` executable on disk in the expected install locations.
 - **Hand correction:** Migration was applied directly because the Kiro hook UI was blocked and the old files cannot register in current Kiro. No hook was claimed to have fired.
+
+## 2026-11-17 — Feature: daily-checklist
+
+- **Surface:** Existing Kiro spec artifacts were opened from the project checkout; implementation was performed directly because the IDE trust/dialog blocker prevented the spec agent from accepting a prompt.
+- **Spec-driven work:** Implemented the four default tasks, local-day rollover and 60-day history cap, custom tasks (1–40 characters, 12-task cap), check/uncheck, celebration, positive cheers, local-only persistence, and the `hsaq:task-changed` event from `requirements.md` and `design.md`.
+- **Design steering:** Replaced placeholder character blocks with inline SVG for Olee the balloon (including knot and string) and Liny the ball. All controls use 56-pixel minimum targets and visible labels.
+- **Hand correction:** Wrote the vanilla-JS implementation outside the Kiro agent because the Kiro workspace remained untrusted and its dialogs were not reachable. Hooks did not fire; formatting and safety checks were run manually.
