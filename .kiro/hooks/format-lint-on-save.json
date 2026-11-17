@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Format & lint on save",
+      "description": "Format app source and check design-system and kid-safety steering rules.",
+      "trigger": "PostFileSave",
+      "matcher": "\\.(html|css|js)$",
+      "action": {
+        "type": "agent",
+        "prompt": "A source file was just saved. Format it consistently with 2-space indentation, double quotes in JS and HTML attributes, semicolons in JS, no trailing whitespace, and a final newline. Then report undeclared variables, unused functions, console.log calls, external calls or URLs, personal-information inputs, shame copy, hard-coded component colors outside the :root palette, and interactive elements smaller than 56 by 56 pixels. Fix formatting directly, list lint findings briefly, and do not change behavior without asking. Follow .kiro/steering/kid-safety.md and .kiro/steering/design-system.md."
+      },
+      "enabled": true
+    }
+  ]
+}

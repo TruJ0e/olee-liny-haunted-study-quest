@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Asset check",
+      "description": "Flag missing, unused, or external image assets after app files change.",
+      "trigger": "PostFileSave",
+      "matcher": "^(index\\.html|styles\\.css|app\\.js|assets[\\\\/].*)$",
+      "action": {
+        "type": "agent",
+        "prompt": "Check image assets. Collect image paths referenced by index.html, url(...) values in styles.css, and app.js string literals ending in .svg, .png, .webp, .jpg, .jpeg, or .gif. Resolve each path from the repository root and report a short table of missing paths with source locations. Note unreferenced files under assets/ and flag absolute HTTP(S) image URLs as kid-safety violations. Do not create placeholders or edit code."
+      },
+      "enabled": true
+    }
+  ]
+}
