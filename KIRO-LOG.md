@@ -14,3 +14,10 @@
 - **Spec-driven work:** Implemented the four default tasks, local-day rollover and 60-day history cap, custom tasks (1–40 characters, 12-task cap), check/uncheck, celebration, positive cheers, local-only persistence, and the `hsaq:task-changed` event from `requirements.md` and `design.md`.
 - **Design steering:** Replaced placeholder character blocks with inline SVG for Olee the balloon (including knot and string) and Liny the ball. All controls use 56-pixel minimum targets and visible labels.
 - **Hand correction:** Wrote the vanilla-JS implementation outside the Kiro agent because the Kiro workspace remained untrusted and its dialogs were not reachable. Hooks did not fire; formatting and safety checks were run manually.
+
+## 2026-11-17 — Feature: streak-lantern
+
+- **Surface:** Existing `streak-lantern` requirements and design artifacts in the Kiro project; direct implementation under the same unresolved IDE blocker.
+- **Spec-driven work:** Added a derived 0–7 lantern glow, immediate first-task lighting, reversible same-day glow, per-day dimming with a floor of 1 after first light, a friendly return line, and a month study-day count.
+- **Design steering:** Rendered a smiling inline-SVG jack-o'-lantern with token-only colors, a glow variable, and motion disabled by `prefers-reduced-motion`.
+- **Hand correction:** Recomputed lantern state from checklist history instead of incrementally mutating it, which prevents drift and makes unchecking the last task reliably reversible. Hooks did not fire; manual syntax, safety, and formatting checks were used.

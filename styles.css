@@ -242,6 +242,84 @@ button:active {
   margin: 14px 0 0;
 }
 
+.lantern-wrap {
+  --lantern-glow: 0.12;
+  display: grid;
+  place-items: center;
+}
+
+.lantern-wrap.glow-1 {
+  --lantern-glow: 0.25;
+}
+
+.lantern-wrap.glow-2 {
+  --lantern-glow: 0.36;
+}
+
+.lantern-wrap.glow-3 {
+  --lantern-glow: 0.47;
+}
+
+.lantern-wrap.glow-4 {
+  --lantern-glow: 0.58;
+}
+
+.lantern-wrap.glow-5 {
+  --lantern-glow: 0.7;
+}
+
+.lantern-wrap.glow-6 {
+  --lantern-glow: 0.82;
+}
+
+.lantern-wrap.glow-7 {
+  --lantern-glow: 0.95;
+}
+
+.lantern-art {
+  width: min(100%, 250px);
+  filter: drop-shadow(0 0 calc(28px * var(--lantern-glow)) var(--pumpkin-orange));
+}
+
+.lantern-stem {
+  fill: var(--midnight-purple-deep);
+}
+
+.lantern-pumpkin {
+  fill: var(--pumpkin-orange-dim);
+}
+
+.lantern-light {
+  fill: var(--pumpkin-orange);
+  opacity: var(--lantern-glow);
+}
+
+.lantern-face {
+  fill: var(--midnight-purple-deep);
+}
+
+.lantern-caption,
+.month-count {
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.month-count {
+  font-weight: 700;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lantern-light {
+    animation: cozy-glow 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes cozy-glow {
+    to {
+      opacity: calc(var(--lantern-glow) * 0.86);
+    }
+  }
+}
+
 .hint {
   min-height: 30px;
 }

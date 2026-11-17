@@ -45,7 +45,8 @@
       version: 1,
       template: template,
       today: { date: localDate(now), tasks: tasksFromTemplate(template) },
-      history: {}
+      history: {},
+      lantern: { glow: 0, lastStudyDate: null, everLit: false }
     };
   }
 
@@ -57,6 +58,9 @@
       candidate.today = fallback.today;
     }
     if (!candidate.history || typeof candidate.history !== "object") candidate.history = {};
+    if (!candidate.lantern || typeof candidate.lantern !== "object") {
+      candidate.lantern = fallback.lantern;
+    }
     return candidate;
   }
 
@@ -127,14 +131,62 @@
     return next;
   }
 
+  function dateAtNoon(value) {
+    var parts = value.split("-").map(Number);
+    return new Date(parts[0], parts[1] - 1, parts[2], 12);
+  }
+
+  function daysBetween(from, to) {
+    return Math.round((dateAtNoon(to) - dateAtNoon(from)) / 86400000);
+  }
+
+  function updateLantern(source, today) {
+    var next = copyState(source);
+    var studyDates = Object.keys(next.history)
+      .filter(function (date) {
+        return date <= today && next.history[date].done > 0;
+      })
+      .sort();
+    if (next.today.date === today && completedCountFor(next.today.tasks) > 0) {
+      studyDates.push(today);
+    }
+    studyDates = studyDates.filter(function (date, index, dates) {
+      return index === 0 || date !== dates[index - 1];
+    });
+    var glow = 0;
+    var previous = null;
+    studyDates.forEach(function (date) {
+      if (!previous) {
+        glow = 1;
+      } else {
+        var quietDays = Math.max(0, daysBetween(previous, date) - 1);
+        glow = Math.min(7, Math.max(1, glow - quietDays) + 1);
+      }
+      previous = date;
+    });
+    if (previous && previous !== today) {
+      glow = Math.max(1, glow - Math.max(0, daysBetween(previous, today) - 1));
+    }
+    next.lantern = {
+      glow: glow,
+      lastStudyDate: previous,
+      everLit: studyDates.length > 0
+    };
+    return next;
+  }
+
+  function completedCountFor(tasks) {
+    return tasks.filter(function (task) {
+      return task.done;
+    }).length;
+  }
+
   var state = ensureToday(loadState());
   var hint = "";
   var cheer = "";
 
   function completedCount() {
-    return state.today.tasks.filter(function (task) {
-      return task.done;
-    }).length;
+    return completedCountFor(state.today.tasks);
   }
 
   function renderChecklist() {
@@ -233,8 +285,50 @@
     }
   }
 
+  function studyDaysThisMonth() {
+    var prefix = state.today.date.slice(0, 7);
+    var dates = Object.keys(state.history).filter(function (date) {
+      return date.startsWith(prefix) && state.history[date].done > 0;
+    });
+    if (completedCount() > 0 && !dates.includes(state.today.date)) dates.push(state.today.date);
+    return dates.length;
+  }
+
+  function renderLantern() {
+    var body = document.querySelector("#streak-lantern .section-body");
+    body.removeAttribute("data-placeholder");
+    body.replaceChildren();
+    var wrap = document.createElement("div");
+    wrap.className = "lantern-wrap glow-" + state.lantern.glow;
+    wrap.innerHTML =
+      '<svg class="lantern-art" viewBox="0 0 220 220" role="img" aria-label="A happy jack-o\'lantern with glow level ' +
+      state.lantern.glow +
+      ' out of 7"><path class="lantern-stem" d="M96 45 Q105 15 130 26 L128 54 Z"/><ellipse class="lantern-pumpkin" cx="110" cy="126" rx="86" ry="72"/><ellipse class="lantern-light" cx="110" cy="128" rx="66" ry="54"/><path class="lantern-face" d="M64 108 Q79 91 94 108 Q79 116 64 108 M126 108 Q141 91 156 108 Q141 116 126 108 M71 139 Q110 174 149 139 Q110 157 71 139"/></svg>';
+    body.appendChild(wrap);
+    var caption = document.createElement("p");
+    caption.className = "lantern-caption";
+    if (!state.lantern.everLit) {
+      caption.textContent = "Complete a task to light your lantern!";
+    } else if (completedCount() > 0) {
+      caption.textContent = "Your study glow is shining at level " + state.lantern.glow + "!";
+    } else if (
+      state.lantern.lastStudyDate &&
+      daysBetween(state.lantern.lastStudyDate, state.today.date) > 1
+    ) {
+      caption.textContent = "Welcome back! Let's add some glow.";
+    } else {
+      caption.textContent = "Every study day adds a little glow.";
+    }
+    var month = document.createElement("p");
+    month.className = "month-count";
+    month.textContent = "Study days this month: " + studyDaysThisMonth();
+    body.append(caption, month);
+  }
+
   function renderAll() {
+    state = updateLantern(state, state.today.date);
     renderChecklist();
+    renderLantern();
   }
 
   function rollover() {
@@ -263,6 +357,8 @@
     toggleTask: toggleTask,
     addTask: addTask,
     removeTask: removeTask,
+    updateLantern: updateLantern,
+    daysBetween: daysBetween,
     getState: function () {
       return copyState(state);
     }
