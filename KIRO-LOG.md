@@ -35,3 +35,12 @@
 - **Spec-driven work:** Added an in-place Grown-ups toggle, pure `summarize` function, today/week/30-day/glow/points/unlock summaries, a calm 14-day calendar, and the exact local-privacy assurance.
 - **Read-only review:** The open view contains only one control, Close, and never invokes `saveState`; opening and closing it leaves child state unchanged.
 - **Hand correction:** Used a same-page panel instead of a modal so focus, responsive layout, and the specified section order remain simple and accessible. Hooks did not fire; manual review verified no edit/delete/export controls exist in the open view.
+
+## 2026-11-17 — Browser verification
+
+- **Surface:** Local HTTP server plus installed Chrome 157 in headless mode, controlled through the Chrome DevTools protocol. The server and browser ran only for the foreground test and were closed before the command returned.
+- **Fresh state:** Four default tasks rendered with 0 points and lantern glow 0.
+- **Completed day:** Clicking all four tasks produced 4/4 complete, 60 points (40 task + 20 full-moon bonus), glow 1, the Pumpkin cap unlock, and the all-done celebration.
+- **Parent view:** Reflected 4/4 tasks, 1 study day this week and in the last 30 days, glow 1/7, 60 lifetime points, and 1/8 costumes unlocked.
+- **Persistence:** After a real page reload, the four completed tasks, 60 points, glow 1, and the `hsaq-state-v1` localStorage record remained.
+- **Dim scenario:** A controlled fixture with three earlier study days and a three-day gap recomputed to glow 1, retained `everLit`, kept the smiling lantern face, and showed “Welcome back! Let's add some glow.”

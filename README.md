@@ -32,10 +32,10 @@ The site is GitHub Pages-ready from the repo root.
 
 ## Status
 
-Foundation scaffold: app shell only; features are specified in `.kiro/specs/` and not yet
-implemented. The foundation files (steering, specs, hooks, shell) were written by hand in Kiro's
-file formats before Kiro was installed on the build machine; Kiro usage is recorded separately
-as it happens.
+The daily checklist, streak lantern, moonlight points and costume unlocks, and read-only parent
+view are implemented. The foundation specs were written before Kiro was installed; the hook
+migration, Kiro limitations, feature work, and verification evidence are recorded honestly in
+[`KIRO-LOG.md`](KIRO-LOG.md).
 
 ## License
 
