@@ -28,3 +28,10 @@
 - **Spec-driven work:** Added reversible 10-point task awards, a reversible 20-point full-list bonus, lifetime and Monday–Sunday totals, seven phase-bucketed moons, all eight permanent unlock thresholds, celebrations, and one-piece-per-slot equip/unequip behavior.
 - **Design steering:** Added local costume SVGs, calm locked silhouettes with remaining-point copy, and equipped costume labels on Olee and Liny. No runtime dependency or external request was added.
 - **Hand correction:** The spec's asset table was completed with repository-local SVGs so the migrated asset hook has real targets. Hooks did not fire; an explicit asset-reference existence check was run manually.
+
+## 2026-11-17 — Feature: parent-view
+
+- **Surface:** Existing `parent-view` requirements and design artifacts in the Kiro project; direct implementation under the unresolved IDE blocker.
+- **Spec-driven work:** Added an in-place Grown-ups toggle, pure `summarize` function, today/week/30-day/glow/points/unlock summaries, a calm 14-day calendar, and the exact local-privacy assurance.
+- **Read-only review:** The open view contains only one control, Close, and never invokes `saveState`; opening and closing it leaves child state unchanged.
+- **Hand correction:** Used a same-page panel instead of a modal so focus, responsive layout, and the specified section order remain simple and accessible. Hooks did not fire; manual review verified no edit/delete/export controls exist in the open view.

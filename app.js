@@ -285,6 +285,40 @@
     return next;
   }
 
+  function studiedOn(source, date) {
+    if (date === source.today.date) return completedCountFor(source.today.tasks) > 0;
+    return Boolean(source.history[date] && source.history[date].done > 0);
+  }
+
+  function summarize(source, today) {
+    var monday = startOfWeek(today);
+    var monthStart = addDays(today, -29);
+    var weekDays = 0;
+    var last30Days = 0;
+    var last14 = [];
+    var cursor;
+    for (cursor = monday; cursor <= today; cursor = addDays(cursor, 1)) {
+      if (studiedOn(source, cursor)) weekDays += 1;
+    }
+    for (cursor = monthStart; cursor <= today; cursor = addDays(cursor, 1)) {
+      if (studiedOn(source, cursor)) last30Days += 1;
+    }
+    for (var offset = 13; offset >= 0; offset -= 1) {
+      var date = addDays(today, -offset);
+      last14.push({ date: date, studied: studiedOn(source, date) });
+    }
+    return {
+      todayDone: completedCountFor(source.today.tasks),
+      todayTotal: source.today.tasks.length,
+      weekDays: weekDays,
+      last30Days: last30Days,
+      glow: source.lantern.glow,
+      lifetime: lifetimePoints(source),
+      unlockedCount: source.costumes.unlocked.length,
+      last14: last14
+    };
+  }
+
   var state = ensureToday(loadState());
   var hint = "";
   var cheer = "";
@@ -505,6 +539,73 @@
     });
   }
 
+  var parentOpen = false;
+
+  function renderParent() {
+    var section = document.getElementById("parent-view");
+    var body = section.querySelector(".section-body");
+    body.removeAttribute("data-placeholder");
+    body.replaceChildren();
+    if (!parentOpen) {
+      var open = document.createElement("button");
+      open.type = "button";
+      open.className = "parent-toggle";
+      open.setAttribute("aria-expanded", "false");
+      open.textContent = "Grown-ups: see progress";
+      open.addEventListener("click", function () {
+        parentOpen = true;
+        renderParent();
+      });
+      var intro = document.createElement("p");
+      intro.textContent = "A calm, read-only glance at study progress.";
+      body.append(intro, open);
+      return;
+    }
+
+    var summary = summarize(state, state.today.date);
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "parent-toggle close-parent";
+    close.setAttribute("aria-expanded", "true");
+    close.textContent = "Close grown-up view";
+    close.addEventListener("click", function () {
+      parentOpen = false;
+      renderParent();
+      document.querySelector(".parent-toggle").focus();
+    });
+
+    var grid = document.createElement("div");
+    grid.className = "parent-stats";
+    [
+      [summary.todayDone + "/" + summary.todayTotal, "Tasks today"],
+      [summary.weekDays, "Study days this week"],
+      [summary.last30Days, "Study days in 30 days"],
+      [summary.glow + "/7", "Lantern glow"],
+      [summary.lifetime, "Lifetime points"],
+      [summary.unlockedCount + "/" + UNLOCKS.length, "Costumes unlocked"]
+    ].forEach(function (stat) {
+      var card = document.createElement("p");
+      card.innerHTML = "<strong>" + stat[0] + "</strong><span>" + stat[1] + "</span>";
+      grid.appendChild(card);
+    });
+
+    var calendarTitle = document.createElement("h3");
+    calendarTitle.textContent = "The last 14 days";
+    var calendar = document.createElement("div");
+    calendar.className = "study-calendar";
+    summary.last14.forEach(function (day) {
+      var cell = document.createElement("span");
+      cell.className = day.studied ? "studied" : "quiet";
+      cell.setAttribute("aria-label", day.date + (day.studied ? ": study day" : ": quiet day"));
+      cell.textContent = day.studied ? "●" : "·";
+      calendar.appendChild(cell);
+    });
+    var privacy = document.createElement("p");
+    privacy.className = "privacy-note";
+    privacy.textContent = "Everything stays on this device. No accounts, no ads, no tracking.";
+    body.append(close, grid, calendarTitle, calendar, privacy);
+  }
+
   function renderAll() {
     state = syncUnlocks(syncTodayPoints(state));
     state = updateLantern(state, state.today.date);
@@ -512,6 +613,7 @@
     renderLantern();
     renderPoints();
     renderCostumes();
+    renderParent();
   }
 
   function rollover() {
@@ -552,6 +654,7 @@
     lifetimePoints: lifetimePoints,
     weeklyPoints: weeklyPoints,
     equipCostume: equipCostume,
+    summarize: summarize,
     UNLOCKS: UNLOCKS,
     getState: function () {
       return copyState(state);

@@ -35,7 +35,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   color: var(--ghost-white);
   line-height: 1.2;
   margin: 0 0 12px;
@@ -47,6 +48,10 @@ h1 {
 
 h2 {
   font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1.2rem;
 }
 
 /* Big tap targets for every interactive element */
@@ -445,6 +450,66 @@ button.costume-tile {
   background: var(--moonlight-cream);
   color: var(--midnight-purple-deep);
   font-size: 0.7rem;
+}
+
+.parent-toggle {
+  width: 100%;
+}
+
+.parent-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 16px 0 24px;
+}
+
+.parent-stats p {
+  margin: 0;
+  border-radius: 16px;
+  padding: 14px;
+  background: var(--midnight-purple-deep);
+  text-align: center;
+}
+
+.parent-stats strong,
+.parent-stats span {
+  display: block;
+}
+
+.parent-stats strong {
+  color: var(--pumpkin-orange);
+  font-size: 1.6rem;
+}
+
+.study-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(40px, 1fr));
+  gap: 8px;
+}
+
+.study-calendar span {
+  display: grid;
+  min-height: 48px;
+  place-items: center;
+  border: 2px solid var(--moonlight-cream);
+  border-radius: 14px;
+  font-size: 1.6rem;
+}
+
+.study-calendar .studied {
+  background: var(--pumpkin-orange);
+  color: var(--midnight-purple-deep);
+}
+
+.study-calendar .quiet {
+  color: var(--moonlight-cream);
+}
+
+.privacy-note {
+  margin: 20px 0 0;
+  border-radius: 16px;
+  padding: 14px;
+  background: var(--midnight-purple-deep);
 }
 
 .site-footer {
