@@ -334,7 +334,117 @@ button:active {
 }
 
 .moon-ring {
-  min-height: 8px;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(48px, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+  overflow-x: auto;
+}
+
+.point-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.point-stats p {
+  margin: 0;
+  border-radius: 16px;
+  padding: 12px;
+  background: var(--midnight-purple-deep);
+  text-align: center;
+}
+
+.point-stats span {
+  display: block;
+}
+
+.point-number {
+  display: block;
+  color: var(--pumpkin-orange);
+  font-size: 1.8rem;
+}
+
+.moon-day {
+  min-width: 48px;
+  color: var(--ghost-white);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.moon-day svg {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: auto;
+}
+
+.moon-day.future {
+  opacity: 0.35;
+}
+
+.moon-outline {
+  fill: var(--midnight-purple-deep);
+  stroke: var(--moonlight-cream);
+  stroke-width: 3;
+}
+
+.moon-fill {
+  fill: var(--moonlight-cream);
+}
+
+.costume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.costume-tile {
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  border: 0;
+  border-radius: 18px;
+  padding: 12px;
+  background: var(--midnight-purple-deep);
+  color: var(--moonlight-cream);
+  text-align: center;
+}
+
+button.costume-tile {
+  width: 100%;
+}
+
+.costume-tile[aria-pressed="true"] {
+  background: var(--pumpkin-orange);
+  color: var(--midnight-purple-deep);
+}
+
+.costume-tile img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.costume-tile.locked img {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.costume-tile strong,
+.costume-tile span {
+  display: block;
+}
+
+.costume-badge {
+  display: block;
+  max-width: 160px;
+  margin: 6px auto 0;
+  border-radius: 12px;
+  padding: 4px 8px;
+  background: var(--moonlight-cream);
+  color: var(--midnight-purple-deep);
+  font-size: 0.7rem;
 }
 
 .site-footer {

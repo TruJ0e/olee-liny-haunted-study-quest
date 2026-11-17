@@ -21,3 +21,10 @@
 - **Spec-driven work:** Added a derived 0–7 lantern glow, immediate first-task lighting, reversible same-day glow, per-day dimming with a floor of 1 after first light, a friendly return line, and a month study-day count.
 - **Design steering:** Rendered a smiling inline-SVG jack-o'-lantern with token-only colors, a glow variable, and motion disabled by `prefers-reduced-motion`.
 - **Hand correction:** Recomputed lantern state from checklist history instead of incrementally mutating it, which prevents drift and makes unchecking the last task reliably reversible. Hooks did not fire; manual syntax, safety, and formatting checks were used.
+
+## 2026-11-17 — Feature: moonlight-points-costume-unlocks
+
+- **Surface:** Existing points/costume requirements and design artifacts in the Kiro project; direct implementation under the unresolved IDE blocker.
+- **Spec-driven work:** Added reversible 10-point task awards, a reversible 20-point full-list bonus, lifetime and Monday–Sunday totals, seven phase-bucketed moons, all eight permanent unlock thresholds, celebrations, and one-piece-per-slot equip/unequip behavior.
+- **Design steering:** Added local costume SVGs, calm locked silhouettes with remaining-point copy, and equipped costume labels on Olee and Liny. No runtime dependency or external request was added.
+- **Hand correction:** The spec's asset table was completed with repository-local SVGs so the migrated asset hook has real targets. Hooks did not fire; an explicit asset-reference existence check was run manually.
