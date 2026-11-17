@@ -1,0 +1,167 @@
+/* Palette and rules: .kiro/steering/design-system.md */
+:root {
+  --midnight-purple: #2b1b4a;
+  --midnight-purple-deep: #1c1033;
+  --midnight-purple-soft: #3e2a66;
+  --pumpkin-orange: #ff8a1f;
+  --pumpkin-orange-dim: #b5651d;
+  --moonlight-cream: #fff4d6;
+  --ghost-white: #f8f8ff;
+
+  --font-body: "Atkinson Hyperlegible", "Nunito", "Trebuchet MS", system-ui, sans-serif;
+  --text-base: 20px;
+  --radius: 24px;
+  --tap: 56px;
+  --gap: 16px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--text-base);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--midnight-purple);
+  color: var(--moonlight-cream);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+h1,
+h2 {
+  color: var(--ghost-white);
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+/* Big tap targets for every interactive element */
+button,
+[role="button"],
+[role="checkbox"],
+input,
+select {
+  min-width: var(--tap);
+  min-height: var(--tap);
+  font: inherit;
+  border-radius: 16px;
+}
+
+button {
+  border: none;
+  padding: 0 20px;
+  background: var(--pumpkin-orange);
+  color: var(--midnight-purple-deep);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:active {
+  background: var(--pumpkin-orange-dim);
+}
+
+:focus-visible {
+  outline: 4px solid var(--ghost-white);
+  outline-offset: 3px;
+}
+
+.site-header {
+  background: var(--midnight-purple-deep);
+  padding: 24px var(--gap);
+  text-align: center;
+}
+
+.guides {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 0;
+}
+
+.guide {
+  margin: 0;
+  text-align: center;
+}
+
+.guide-art {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 8px;
+}
+
+/* Placeholder art until assets/characters/*.svg land */
+.guide-olee .guide-art.placeholder {
+  border-radius: 50% 50% 46% 46%;
+  background: var(--pumpkin-orange);
+}
+
+.guide-liny .guide-art.placeholder {
+  border-radius: 50%;
+  background: var(--moonlight-cream);
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: var(--gap);
+}
+
+@media (min-width: 720px) {
+  .sections {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #checklist,
+  #parent-view {
+    grid-column: 1 / -1;
+  }
+}
+
+.card {
+  background: var(--midnight-purple-soft);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 6px 0 var(--midnight-purple-deep);
+}
+
+.placeholder-note {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.moon-ring {
+  min-height: 8px;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 24px var(--gap) 40px;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

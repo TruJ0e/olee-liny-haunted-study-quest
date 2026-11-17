@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"
+    />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#2B1B4A" />
+    <title>Haunted Study Quest</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 class="title">Olee &amp; Liny's Haunted Study Quest</h1>
+      <div class="guides" id="guides" aria-label="Olee and Liny, your study guides">
+        <figure class="guide guide-olee">
+          <div class="guide-art placeholder" aria-hidden="true"></div>
+          <figcaption>Olee</figcaption>
+        </figure>
+        <figure class="guide guide-liny">
+          <div class="guide-art placeholder" aria-hidden="true"></div>
+          <figcaption>Liny</figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <main class="sections">
+      <section id="checklist" class="card" aria-labelledby="checklist-title">
+        <h2 id="checklist-title">Today's study list</h2>
+        <div class="section-body" data-placeholder></div>
+      </section>
+
+      <section id="streak-lantern" class="card" aria-labelledby="streak-lantern-title">
+        <h2 id="streak-lantern-title">Streak lantern</h2>
+        <div class="section-body" data-placeholder></div>
+      </section>
+
+      <section id="moonlight-points" class="card" aria-labelledby="moonlight-points-title">
+        <h2 id="moonlight-points-title">Moonlight points</h2>
+        <div class="section-body" data-placeholder></div>
+        <div id="moon-ring" class="moon-ring" aria-label="This week's moon"></div>
+      </section>
+
+      <section id="costume-shelf" class="card" aria-labelledby="costume-shelf-title">
+        <h2 id="costume-shelf-title">Costume shelf</h2>
+        <div class="section-body" data-placeholder></div>
+      </section>
+
+      <section id="parent-view" class="card parent" aria-labelledby="parent-view-title">
+        <h2 id="parent-view-title">Grown-ups</h2>
+        <div class="section-body" data-placeholder></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Everything stays on this device. No accounts, no ads, no tracking.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+# OS / editor noise only. Do NOT ignore .kiro/ — it is part of the submission.
+.DS_Store
+Thumbs.db
+node_modules/

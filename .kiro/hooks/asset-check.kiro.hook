@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "Asset check",
+  "description": "When app files or assets change, flag any image asset referenced by the app that does not exist in the repo.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "assets/**/*"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check image assets. Collect every image path referenced by the app: src/href attributes in index.html (img, link rel=icon, source), url(...) values in styles.css, and string literals in app.js that end in .svg, .png, .webp, .jpg, .jpeg or .gif (including the `asset` fields in the UNLOCKS table). Resolve each relative to the repo root and check that the file exists. Report a short table of MISSING paths with the file and line that references them, and note any files in assets/ that nothing references. Flag any absolute http(s) image URL as a kid-safety violation (no external calls). Do not create placeholder files or edit code; just report."
+  }
+}
